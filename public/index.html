@@ -1,10 +1,22 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>Carlotta's Image Board</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <h1>Carlotta's Image Board</h1>
+    <!-- container for vue instance will have access to vue code -->
+    <div id="main">
+        <h2>{{ heading }}</h2>
+        <div v-for="each in images">
+            <img src={{ each.url }} />
+            <p>{{ each.title }}</p>
+        </div>
+    </div>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <!-- script.js needs to be linked after vue and axios have been loaded -->
+    <script src="/js/script.js"></script>
 </body>
 </html>
