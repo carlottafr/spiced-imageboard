@@ -19,20 +19,14 @@
             // I want to eventually render
             var self = this;
             axios.get("/images").then(function (response) {
-                console.log("response from /images: ", response.data);
-                // console.log("This is 'self' inside axios: ", self);
-                // self.cities = response.data;
+                // console.log("response from /images: ", response.data);
                 self.images = response.data;
-                // for (var i = 0; i < self.images.length; i++) {
-                //     console.log("The image URLs: ", self.images.url);
-                //     console.log("The image titles: ", self.images.titles);
-                // }
             });
         },
-        methods: {
-            myFunction: function () {
-                console.log("My function is running!");
-            },
-        },
+        // methods: {
+        //     myFunction: function () {
+        //         console.log("My function is running!");
+        //     },
+        // },
     });
 })();

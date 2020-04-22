@@ -5,5 +5,5 @@ const db = spicedPg(
 );
 
 module.exports.getBasicEntries = () => {
-    return db.query(`SELECT url, title FROM images;`);
+    return db.query(`SELECT url, title FROM images ORDER BY created_at DESC;`);
 };
