@@ -7,8 +7,16 @@
 <body>
     <h1>Carlotta's Image Board</h1>
     <!-- container for vue instance will have access to vue code -->
+    <h2>Latest Images</h2>
     <div id="main">
-        <h2>{{ heading }}</h2>
+        <form>
+            <input v-model='title' type="text" name="title" placeholder="Title">
+            <input v-model='description' type="text" name="description" placeholder="Description">
+            <input v-model='username' type="text" name="username" placeholder="Username">
+            <!-- <label for="file">Choose a file</label> -->
+            <input @change='handleChange' type="file" name="file" id="file" accept="image/*">
+            <button @click='handleClick'>Submit</button>
+        </form>
         <div class="container">
             <div v-for="each in images" class="image">
                 <img :src="each.url" />

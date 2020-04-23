@@ -9,9 +9,11 @@
         // render on screen
         // this data is 'reactive'
         data: {
-            heading: "Latest Images",
-            // seen: true,
             images: [],
+            title: "",
+            description: "",
+            username: "",
+            file: null,
         },
         mounted: function () {
             console.log("This is 'this' outside axios: ", this);
@@ -19,14 +21,41 @@
             // I want to eventually render
             var self = this;
             axios.get("/images").then(function (response) {
-                // console.log("response from /images: ", response.data);
+                console.log("response from /images: ", response.data);
                 self.images = response.data;
             });
         },
-        // methods: {
-        //     myFunction: function () {
-        //         console.log("My function is running!");
-        //     },
-        // },
+        methods: {
+            handleClick: function (e) {
+                e.preventDefault();
+                console.log(
+                    "Someone clicked on the button, that's what in it: ",
+                    this
+                );
+                var self = this;
+                var formData = new FormData();
+                formData.append("title", this.title);
+                formData.append("description", this.description);
+                formData.append("username", this.username);
+                formData.append("file", this.file);
+                // ^ would be an empty object with console.log
+                // but the key-value pairs are added anyway
+                // v send info to the server
+                axios
+                    .post("/upload", formData)
+                    .then(function (res) {
+                        console.log("Response from POST /upload: ", res);
+                        self.images.unshift(res.data);
+                    })
+                    .catch(function (err) {
+                        console.log("Error in POST /upload: ", err);
+                    });
+            },
+            handleChange: function (e) {
+                // console.log("handleChange is running");
+                // console.log("File: ", e.target.files[0]);
+                this.file = e.target.files[0];
+            },
+        },
     });
 })();
