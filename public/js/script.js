@@ -16,22 +16,22 @@
             file: null,
         },
         mounted: function () {
-            console.log("This is 'this' outside axios: ", this);
+            // console.log("This is 'this' outside axios: ", this);
             // check for images in the db that
             // I want to eventually render
             var self = this;
             axios.get("/images").then(function (response) {
-                console.log("response from /images: ", response.data);
+                // console.log("response from /images: ", response.data);
                 self.images = response.data;
             });
         },
         methods: {
             handleClick: function (e) {
                 e.preventDefault();
-                console.log(
-                    "Someone clicked on the button, that's what in it: ",
-                    this
-                );
+                // console.log(
+                //     "Someone clicked on the button, that's what in it: ",
+                //     this
+                // );
                 var self = this;
                 var formData = new FormData();
                 formData.append("title", this.title);
@@ -43,9 +43,12 @@
                 // v send info to the server
                 axios
                     .post("/upload", formData)
-                    .then(function (res) {
-                        console.log("Response from POST /upload: ", res);
-                        self.images.unshift(res.data);
+                    .then(function (response) {
+                        console.log(
+                            "Response from POST /upload: ",
+                            response.data
+                        );
+                        self.images.unshift(response.data[0]);
                     })
                     .catch(function (err) {
                         console.log("Error in POST /upload: ", err);

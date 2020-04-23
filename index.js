@@ -46,8 +46,8 @@ app.get("/images", (req, res) => {
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("File: ", req.file);
-    console.log("Input: ", req.body);
+    // console.log("File: ", req.file);
+    // console.log("Input: ", req.body);
     let awsUrl = config.s3Url;
     awsUrl += req.file.filename;
     req.body.url = awsUrl;
@@ -60,12 +60,8 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
                 req.body.title,
                 req.body.description
             )
-            .then((id) => {
-                if (id) {
-                    res.json(req.body);
-                } else {
-                    res.sendStatus(500);
-                }
+            .then((result) => {
+                res.json(result.rows);
             });
     } else {
         res.json({
