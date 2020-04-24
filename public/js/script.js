@@ -1,4 +1,35 @@
 (function () {
+    Vue.component("modal-component", {
+        template: "#commentModal",
+        props: ["postTitle", "id"],
+        mounted: function () {
+            console.log("postTitle: ", this.postTitle);
+            console.log("ID in mounted of components: ", this.id);
+            // make a request to server sending the id
+            // ask for all the information about the id
+            axios
+                .post("/image-post", { id: this.id })
+                .then(function (response) {
+                    console.log("This is the response data: ", response.data);
+                })
+                .catch(function (err) {
+                    console.log("Error in POST /image-post: ", err);
+                });
+        },
+        data: function () {
+            return {
+                name: "Carlotta",
+                count: 0,
+                id: null,
+            };
+        },
+        methods: {
+            closeModal: function () {
+                console.log("I am emitting a msg to the vue instance");
+                this.$emit("close"); // is used in @close
+            },
+        },
+    });
     new Vue({
         // element -> el
         // which element in my html will have access
@@ -9,11 +40,30 @@
         // render on screen
         // this data is 'reactive'
         data: {
+            selectedImage: null,
             images: [],
             title: "",
             description: "",
-            username: "",
+            op: "",
+            poster: "",
+            comment: "",
+            time: "",
+            id: "",
             file: null,
+            fruits: [
+                {
+                    title: "🥝",
+                    id: 1,
+                },
+                {
+                    title: "🍓",
+                    id: 2,
+                },
+                {
+                    title: "🍋",
+                    id: 3,
+                },
+            ],
         },
         mounted: function () {
             // console.log("This is 'this' outside axios: ", this);
@@ -26,6 +76,10 @@
             });
         },
         methods: {
+            closeMe: function () {
+                console.log("Vue got the emitted message!");
+                // close the modal
+            },
             handleClick: function (e) {
                 e.preventDefault();
                 // console.log(

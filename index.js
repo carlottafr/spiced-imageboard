@@ -34,6 +34,8 @@ const uploader = multer({
 
 // ^ Image upload boilerplate end
 
+// GET /images
+
 app.get("/images", (req, res) => {
     return db
         .getEntries()
@@ -44,6 +46,8 @@ app.get("/images", (req, res) => {
             console.log("There is an error in db.getEntries: ", err);
         });
 });
+
+// POST /upload
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     // console.log("File: ", req.file);
@@ -56,7 +60,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         return db
             .insertEntry(
                 req.body.url,
-                req.body.username,
+                req.body.op,
                 req.body.title,
                 req.body.description
             )
@@ -68,6 +72,13 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             success: false,
         });
     }
+});
+
+// GET /image-post
+
+app.post("/image-post", (req, res) => {
+    console.log("The req.body: ", req.body);
+    res.sendStatus(200);
 });
 
 app.listen(8080, () => {

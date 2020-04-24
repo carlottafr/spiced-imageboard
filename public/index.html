@@ -12,18 +12,43 @@
         <form>
             <input v-model='title' type="text" name="title" placeholder="Title">
             <input v-model='description' type="text" name="description" placeholder="Description">
-            <input v-model='username' type="text" name="username" placeholder="Username">
+            <input v-model='op' type="text" name="op" placeholder="Username">
             <!-- <label for="file">Choose a file</label> -->
             <input @change='handleChange' type="file" name="file" id="file" accept="image/*">
             <button @click='handleClick'>Submit</button>
         </form>
+        <!-- 'post-title' can be anything, but has to be 'kebap-base', not camelCase -->
+        <modal-component 
+            v-if="selectedImage"
+            :id="selectedImage"
+            @close="closeMe"
+        ></modal-component>
+
         <div class="container">
-            <div v-for="each in images" class="image">
-                <img :src="each.url" />
-                <label for=img>{{ each.title }}</label>
+            <div 
+                class="image"
+                @click="selectedImage = image.id"
+                v-for="image in images"
+                v-if="images.length">
+                <img :src="image.url" />
+                <label for=img>{{ image.title }}</label>
             </div>
         </div>
+        <!-- <first-component></first-component> -->
     </div>
+
+    <!-- We can only return one element from the script tag. -->
+    <script type="text/x-template" id="commentModal">
+        <div class="component">
+            <p id="x">X</p>
+            <h1 @click="closeModal">This is my first template</h1>
+            <h2>Hello {{name}}
+                <button @click="count++">Click</button>
+            </h2>
+            <h3>Count: {{count}}</h3>
+        </div>
+    </script>
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <!-- script.js needs to be linked after vue and axios have been loaded -->

@@ -5,6 +5,16 @@ body {
     text-align: center;
 }
 
+.component {
+    background-color: hotpink;
+    /* stretch it over the screen: */
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 .container {
     margin: 10px;
     display: grid;
