@@ -1,8 +1,18 @@
 (function () {
     Vue.component("modal-component", {
         template: "#commentModal",
-        props: ["postTitle", "id"],
+        props: [
+            "id",
+            "title",
+            "url",
+            "description",
+            "optime",
+            "poster",
+            "comment",
+            "postertime",
+        ],
         mounted: function () {
+            var self = this;
             console.log("postTitle: ", this.postTitle);
             console.log("ID in mounted of components: ", this.id);
             // make a request to server sending the id
@@ -11,6 +21,8 @@
                 .post("/image-post", { id: this.id })
                 .then(function (response) {
                     console.log("This is the response data: ", response.data);
+                    self.images = response.data;
+                    console.log("This is self.images: ", self.images);
                 })
                 .catch(function (err) {
                     console.log("Error in POST /image-post: ", err);
@@ -20,7 +32,7 @@
             return {
                 name: "Carlotta",
                 count: 0,
-                id: null,
+                images: [],
             };
         },
         methods: {
@@ -45,10 +57,6 @@
             title: "",
             description: "",
             op: "",
-            poster: "",
-            comment: "",
-            time: "",
-            id: "",
             file: null,
             fruits: [
                 {
@@ -90,7 +98,7 @@
                 var formData = new FormData();
                 formData.append("title", this.title);
                 formData.append("description", this.description);
-                formData.append("username", this.username);
+                formData.append("username", this.op);
                 formData.append("file", this.file);
                 // ^ would be an empty object with console.log
                 // but the key-value pairs are added anyway

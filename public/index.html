@@ -21,6 +21,13 @@
         <modal-component 
             v-if="selectedImage"
             :id="selectedImage"
+            :url="images.url"
+            :title="images.title"
+            :description="images.description"
+            :optime="images.optime"
+            :poster="images.poster"
+            :comment="images.comment"
+            :postertime="images.postertime"
             @close="closeMe"
         ></modal-component>
 
@@ -41,6 +48,15 @@
     <script type="text/x-template" id="commentModal">
         <div class="component">
             <p id="x">X</p>
+            <img :src="url" />
+            <p>Title: {{title}}<br />
+                Description: {{description}}<br />
+                OP: {{op}}<br />
+                OP Time: {{optime}}<br />
+                Poster: {{poster}}<br />
+                Comment: {{comment}}<br />
+                Poster Time: {{postertime}}
+            </p>
             <h1 @click="closeModal">This is my first template</h1>
             <h2>Hello {{name}}
                 <button @click="count++">Click</button>

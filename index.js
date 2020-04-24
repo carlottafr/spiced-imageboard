@@ -6,6 +6,8 @@ const config = require("./config");
 
 app.use(express.static("public"));
 
+app.use(express.json());
+
 // Image upload boilerplate start v
 // will upload sent files to my
 // hard drive in a folder called /uploads
@@ -78,7 +80,15 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 
 app.post("/image-post", (req, res) => {
     console.log("The req.body: ", req.body);
-    res.sendStatus(200);
+    return db
+        .imagePost(req.body.id)
+        .then((result) => {
+            console.log("This is the result: ", result.rows);
+            res.json(result.rows);
+        })
+        .catch((err) => {
+            console.log("Error server POST /image-post: ", err);
+        });
 });
 
 app.listen(8080, () => {
