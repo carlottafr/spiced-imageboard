@@ -15,13 +15,10 @@ module.exports.insertEntry = (url, username, title, description) => {
     );
 };
 
-module.exports.imagePost = (id) => {
-    return db.query(
-        `SELECT images.url AS url, images.op AS op, images.title AS title, images.description AS description, images.created_at AS optime, comments.poster AS poster, comments.comment AS comment, comments.created_at AS postertime 
-        FROM images 
-        LEFT JOIN comments 
-        ON images.id = comments.image_id 
-        WHERE images.id = $1;`,
-        [id]
-    );
+module.exports.getImage = (id) => {
+    return db.query(`SELECT * FROM images WHERE id = $1;`, [id]);
+};
+
+module.exports.getComments = (id) => {
+    return db.query(`SELECT * FROM comments WHERE image_id = $1;`, [id]);
 };

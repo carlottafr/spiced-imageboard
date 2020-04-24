@@ -43,3 +43,10 @@ img {
     object-fit: cover;
     overflow: hidden;
 }
+
+#x {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

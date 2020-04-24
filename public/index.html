@@ -21,13 +21,6 @@
         <modal-component 
             v-if="selectedImage"
             :id="selectedImage"
-            :url="images.url"
-            :title="images.title"
-            :description="images.description"
-            :optime="images.optime"
-            :poster="images.poster"
-            :comment="images.comment"
-            :postertime="images.postertime"
             @close="closeMe"
         ></modal-component>
 
@@ -47,21 +40,19 @@
     <!-- We can only return one element from the script tag. -->
     <script type="text/x-template" id="commentModal">
         <div class="component">
-            <p id="x">X</p>
-            <img :src="url" />
-            <p>Title: {{title}}<br />
-                Description: {{description}}<br />
-                OP: {{op}}<br />
-                OP Time: {{optime}}<br />
-                Poster: {{poster}}<br />
-                Comment: {{comment}}<br />
-                Poster Time: {{postertime}}
+            <p id="x" @click="closeModal">X</p>
+            <img :src="image.url" />
+            <p>Title: {{image.title}}</p>
+            <p>Description: {{image.description}}</p>
+            <p>OP: {{image.op}}</p>
+            <p>OP Time: {{image.created_at}}</p>
+            <p class="comments"
+                v-for="comment in comments"
+                v-if="comments.length">
+                Poster: {{comment.poster}}<br />
+                Comment: {{comment.comment}}<br />
+                Poster Time: {{comment.created_at}}
             </p>
-            <h1 @click="closeModal">This is my first template</h1>
-            <h2>Hello {{name}}
-                <button @click="count++">Click</button>
-            </h2>
-            <h3>Count: {{count}}</h3>
         </div>
     </script>
 

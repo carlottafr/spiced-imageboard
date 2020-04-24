@@ -56,3 +56,9 @@ INSERT INTO comments (poster, comment, image_id) VALUES (
     'I just ordered 🍕',
     3
 );
+
+INSERT INTO comments (poster, comment, image_id) VALUES (
+    'discoduck',
+    'I prefer muffins over 🍕',
+    3
+);

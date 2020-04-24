@@ -1,16 +1,7 @@
 (function () {
     Vue.component("modal-component", {
         template: "#commentModal",
-        props: [
-            "id",
-            "title",
-            "url",
-            "description",
-            "optime",
-            "poster",
-            "comment",
-            "postertime",
-        ],
+        props: ["id"],
         mounted: function () {
             var self = this;
             console.log("postTitle: ", this.postTitle);
@@ -21,8 +12,9 @@
                 .post("/image-post", { id: this.id })
                 .then(function (response) {
                     console.log("This is the response data: ", response.data);
-                    self.images = response.data;
-                    console.log("This is self.images: ", self.images);
+                    self.image = response.data.shift();
+                    self.comments = response.data[0];
+                    console.log("These are the comments: ", response.data[0]);
                 })
                 .catch(function (err) {
                     console.log("Error in POST /image-post: ", err);
@@ -30,9 +22,17 @@
         },
         data: function () {
             return {
-                name: "Carlotta",
-                count: 0,
-                images: [],
+                image: {
+                    url: "",
+                    title: "",
+                    description: "",
+                    op: "",
+                    optime: "",
+                    poster: "",
+                    comment: "",
+                    postertime: "",
+                },
+                comments: [],
             };
         },
         methods: {
@@ -87,6 +87,7 @@
             closeMe: function () {
                 console.log("Vue got the emitted message!");
                 // close the modal
+                this.selectedImage = null;
             },
             handleClick: function (e) {
                 e.preventDefault();

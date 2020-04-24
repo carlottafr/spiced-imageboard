@@ -80,11 +80,21 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 
 app.post("/image-post", (req, res) => {
     console.log("The req.body: ", req.body);
+    let finalJson = [];
     return db
-        .imagePost(req.body.id)
+        .getImage(req.body.id)
         .then((result) => {
-            console.log("This is the result: ", result.rows);
-            res.json(result.rows);
+            console.log("This is the getImage result: ", result.rows);
+            finalJson.push(result.rows[0]);
+            console.log("finalJson stage 1: ", finalJson);
+        })
+        .then(() => {
+            return db.getComments(req.body.id).then((result) => {
+                console.log("This is the getComments result: ", result.rows);
+                finalJson.push(result.rows);
+                console.log("finalJson stage 2: ", finalJson);
+                res.json(finalJson);
+            });
         })
         .catch((err) => {
             console.log("Error server POST /image-post: ", err);
