@@ -79,25 +79,38 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 // GET /image-post
 
 app.post("/image-post", (req, res) => {
-    console.log("The req.body: ", req.body);
+    // console.log("The req.body in POST /image-post: ", req.body);
     let finalJson = [];
     return db
         .getImage(req.body.id)
         .then((result) => {
-            console.log("This is the getImage result: ", result.rows);
+            // console.log("This is the getImage result: ", result.rows);
             finalJson.push(result.rows[0]);
             console.log("finalJson stage 1: ", finalJson);
         })
         .then(() => {
             return db.getComments(req.body.id).then((result) => {
-                console.log("This is the getComments result: ", result.rows);
+                // console.log("This is the getComments result: ", result.rows);
                 finalJson.push(result.rows);
-                console.log("finalJson stage 2: ", finalJson);
+                // console.log("finalJson stage 2: ", finalJson);
                 res.json(finalJson);
             });
         })
         .catch((err) => {
             console.log("Error server POST /image-post: ", err);
+        });
+});
+
+app.post("/post-comment", (req, res) => {
+    console.log("The req.body in POST /post-comment: ", req.body);
+    return db
+        .addComment(req.body.poster, req.body.comment, req.body.image_id)
+        .then((result) => {
+            console.log("This is the result of addComment: ", result.rows);
+            res.json(result.rows);
+        })
+        .catch((err) => {
+            console.log("Error in POST /post-comment: ", err);
         });
 });
 

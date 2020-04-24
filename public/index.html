@@ -46,6 +46,10 @@
             <p>Description: {{image.description}}</p>
             <p>OP: {{image.op}}</p>
             <p>OP Time: {{image.created_at}}</p>
+            <p>Post your comment here:</p>
+            <input v-model="poster" type="text" name="poster" placeholder="Username">
+            <input v-model="comment" type="text" name="comment" placeholder="Comment">
+            <button @click="postComment">Submit</button>
             <p class="comments"
                 v-for="comment in comments"
                 v-if="comments.length">

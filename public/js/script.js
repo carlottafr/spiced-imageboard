@@ -33,12 +33,33 @@
                     postertime: "",
                 },
                 comments: [],
+                poster: "",
+                comment: "",
+                created_at: "",
             };
         },
         methods: {
             closeModal: function () {
                 console.log("I am emitting a msg to the vue instance");
                 this.$emit("close"); // is used in @close
+            },
+            postComment: function (e) {
+                e.preventDefault();
+                console.log("Someone wants to post a comment.");
+                var self = this;
+                var comment = {
+                    poster: this.poster,
+                    comment: this.comment,
+                    image_id: this.id,
+                };
+                console.log("This is the comment: ", comment);
+                axios.post("/post-comment", comment).then(function (response) {
+                    console.log(
+                        "This is the response data from POST /post-comment: ",
+                        response.data
+                    );
+                    self.comments.unshift(response.data[0]);
+                });
             },
         },
     });

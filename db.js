@@ -20,5 +20,15 @@ module.exports.getImage = (id) => {
 };
 
 module.exports.getComments = (id) => {
-    return db.query(`SELECT * FROM comments WHERE image_id = $1;`, [id]);
+    return db.query(
+        `SELECT * FROM comments WHERE image_id = $1 ORDER BY created_at DESC;`,
+        [id]
+    );
+};
+
+module.exports.addComment = (poster, comment, image_id) => {
+    return db.query(
+        `INSERT INTO comments (poster, comment, image_id) VALUES ($1, $2, $3) RETURNING *;`,
+        [poster, comment, image_id]
+    );
 };
