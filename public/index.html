@@ -25,13 +25,14 @@
 
         <div class="container">
             <div 
-                class="image"
-                @click="selectedImage = image.id"
-                v-for="image in images"
-                v-if="images.length">
+            class="image"
+            v-for="image in images"
+            v-if="images.length">
+                <a :href="'#' + image.id">
                 <img :src="image.url" />
                 <br />
                 <label for=img>"{{ image.title }}" by {{ image.op }}</label>
+                </a>
             </div>
         </div>
         <button v-if="moreAlbums" id="more" @click="getMore">Load More</button>

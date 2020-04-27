@@ -4,14 +4,13 @@ body {
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     text-align: center;
     font-size: 12px;
-    /* background: rgb(47, 47, 47);
-    background: linear-gradient(
-        135deg,
-        rgba(107, 105, 105, 1) 0%,
-        rgba(175, 179, 180, 1) 100%
-    );
-    background-repeat: no-repeat;
-    background-size: contain; */
+}
+
+a,
+.container label {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
 }
 
 button,

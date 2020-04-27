@@ -3,19 +3,7 @@
         template: "#commentModal",
         props: ["id"],
         mounted: function () {
-            var self = this;
-            console.log("ID in mounted of components: ", this.id);
-            // make a request to server sending the id
-            // ask for all the information about the id
-            axios
-                .post("/image-post", { id: this.id })
-                .then(function (response) {
-                    self.image = response.data.shift();
-                    self.comments = response.data[0];
-                })
-                .catch(function (err) {
-                    console.log("Error in POST /image-post: ", err);
-                });
+            this.showModal();
         },
         data: function () {
             return {
@@ -34,9 +22,29 @@
                 comment: "",
             };
         },
+        watch: {
+            id: function () {
+                // console.log("id changed as noticed the watcher.");
+                this.showModal();
+            },
+        },
         methods: {
+            showModal: function () {
+                var self = this;
+                // make a request to server sending the id
+                // ask for all the information about the id
+                axios
+                    .post("/image-post", { id: this.id })
+                    .then(function (response) {
+                        self.image = response.data.shift();
+                        self.comments = response.data[0];
+                    })
+                    .catch(function (err) {
+                        console.log("Error in POST /image-post: ", err);
+                    });
+            },
             closeModal: function () {
-                console.log("I am emitting a msg to the vue instance");
+                // console.log("I am emitting a msg to the vue instance");
                 this.$emit("close"); // is used in @close
             },
             postComment: function (e) {
@@ -63,7 +71,9 @@
         // render on screen
         // this data is 'reactive'
         data: {
-            selectedImage: null,
+            // gives me the value after the # in the URL
+            // images can now be shared
+            selectedImage: location.hash.slice(1),
             images: [],
             title: "",
             description: "",
@@ -78,12 +88,18 @@
             axios.get("/images").then(function (response) {
                 self.images = response.data;
             });
+
+            window.addEventListener("hashchange", function () {
+                // opens the modal
+                self.selectedImage = location.hash.slice(1);
+            });
         },
         methods: {
             closeMe: function () {
                 console.log("Vue got the emitted message!");
                 // closes the modal
                 this.selectedImage = null;
+                location.hash = "";
             },
             handleClick: function (e) {
                 e.preventDefault();
