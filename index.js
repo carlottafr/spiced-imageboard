@@ -49,6 +49,19 @@ app.get("/images", (req, res) => {
         });
 });
 
+// POST /get-more
+
+app.post("/get-more", (req, res) => {
+    return db
+        .getMoreEntries(req.body.id)
+        .then((result) => {
+            res.json(result.rows);
+        })
+        .catch((err) => {
+            console.log("There is an error in db.getMoreEntries: ", err);
+        });
+});
+
 // POST /upload
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
@@ -86,7 +99,7 @@ app.post("/image-post", (req, res) => {
         .then((result) => {
             // console.log("This is the getImage result: ", result.rows);
             finalJson.push(result.rows[0]);
-            console.log("finalJson stage 1: ", finalJson);
+            // console.log("finalJson stage 1: ", finalJson);
         })
         .then(() => {
             return db.getComments(req.body.id).then((result) => {
@@ -101,12 +114,14 @@ app.post("/image-post", (req, res) => {
         });
 });
 
+// POST /post-comment
+
 app.post("/post-comment", (req, res) => {
-    console.log("The req.body in POST /post-comment: ", req.body);
+    // console.log("The req.body in POST /post-comment: ", req.body);
     return db
         .addComment(req.body.poster, req.body.comment, req.body.image_id)
         .then((result) => {
-            console.log("This is the result of addComment: ", result.rows);
+            // console.log("This is the result of addComment: ", result.rows);
             res.json(result.rows);
         })
         .catch((err) => {

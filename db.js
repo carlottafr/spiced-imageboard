@@ -5,13 +5,22 @@ const db = spicedPg(
 );
 
 module.exports.getEntries = () => {
-    return db.query(`SELECT * FROM images ORDER BY created_at DESC;`);
+    return db.query(`SELECT * FROM images ORDER BY id DESC LIMIT 12;`);
 };
 
-module.exports.insertEntry = (url, username, title, description) => {
+module.exports.getMoreEntries = (id) => {
     return db.query(
-        `INSERT INTO images (url, username, title, description) VALUES ($1, $2, $3, $4) RETURNING *;`,
-        [url, username, title, description]
+        `SELECT *, (
+            SELECT id FROM images ORDER BY id ASC LIMIT 1
+        ) AS lowest_id FROM images WHERE id < $1 ORDER BY id DESC LIMIT 12;`,
+        [id]
+    );
+};
+
+module.exports.insertEntry = (url, op, title, description) => {
+    return db.query(
+        `INSERT INTO images (url, op, title, description) VALUES ($1, $2, $3, $4) RETURNING *;`,
+        [url, op, title, description]
     );
 };
 
@@ -21,7 +30,7 @@ module.exports.getImage = (id) => {
 
 module.exports.getComments = (id) => {
     return db.query(
-        `SELECT * FROM comments WHERE image_id = $1 ORDER BY created_at DESC;`,
+        `SELECT * FROM comments WHERE image_id = $1 ORDER BY id DESC;`,
         [id]
     );
 };

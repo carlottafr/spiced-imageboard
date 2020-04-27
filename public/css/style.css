@@ -4,10 +4,52 @@ body {
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     text-align: center;
     font-size: 12px;
+    /* background: rgb(47, 47, 47);
+    background: linear-gradient(
+        135deg,
+        rgba(107, 105, 105, 1) 0%,
+        rgba(175, 179, 180, 1) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: contain; */
+}
+
+button,
+#inputlabel {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+    color: white;
+    border-radius: 0.3em;
+    cursor: pointer;
+    text-shadow: 0px 2px 2px #000;
+}
+
+button {
+    background: green;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    margin-top: 5px;
+    min-width: 310px;
+    max-width: 310px;
+    min-height: 240px;
+    max-height: 240px;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .component {
-    background-color: hotpink;
+    background: hotpink;
     /* stretch it over the screen: */
     position: fixed;
     top: 0;
@@ -17,37 +59,122 @@ body {
 }
 
 .container {
-    margin: 10px;
+    margin: 20px;
     display: grid;
-    grid-template-columns: 320px;
+    grid-template-columns: repeat(3, 320px);
     justify-content: center;
     align-items: center;
+    background: #383e42;
 }
 
 .image {
-    border: 1px solid darkgray;
+    border: 1px solid white;
     border-radius: 0.3em;
-    margin: 10px;
-    padding: 5px;
-    max-height: 270px;
-}
-
-.image,
-img {
     min-width: 320px;
     max-width: 320px;
     min-height: 250px;
+    max-height: 270px;
+    margin-bottom: 20px;
+    background: white;
 }
 
-img {
-    max-height: 250px;
-    object-fit: cover;
+.component img {
+    min-width: 350px;
+    max-width: 400px;
+    min-height: 300px;
+    max-height: 350px;
+}
+
+.component {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
     overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#inputlabel {
+    background: #383e42;
 }
 
 #x {
     cursor: pointer;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 0px;
+    right: 0px;
+}
+
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+    body {
+        font-size: 32px;
+    }
+
+    form {
+        width: 60%;
+        align-items: unset;
+        justify-content: unset;
+    }
+
+    form input[type="text"] {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    input,
+    button,
+    #inputlabel {
+        font-size: 40px;
+    }
+
+    button,
+    #inputlabel {
+        width: 30%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .container {
+        margin-left: 20px;
+        background: white;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image {
+        border: 1px solid gray;
+        min-width: 930px;
+        max-width: 930px;
+        min-height: 940px;
+        max-height: 940px;
+        padding-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    img,
+    .component img {
+        margin-top: 5px;
+        min-width: 900px;
+        max-width: 900px;
+        min-height: 880px;
+        max-height: 880px;
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    label {
+        margin-top: 5px;
+    }
+
+    #inputlabel {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

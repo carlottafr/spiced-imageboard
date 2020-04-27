@@ -40,7 +40,7 @@ exports.upload = (req, res, next) => {
             // it worked!!!
             // console.log("AWS putObject successful.");
             next();
-            // fs.unlink(path, () => {});
+            fs.unlink(path, () => {});
             // ^ deletes the /uploads images
         })
         .catch((err) => {

@@ -11,24 +11,45 @@ CREATE TABLE images(
 );
 
 INSERT INTO images (url, op, title, description) VALUES (
-    'https://s3.amazonaws.com/spicedling/jAVZmnxnZ-U95ap2-PLliFFF7TO0KqZm.jpg',
-    'funkychicken',
-    'Welcome to Spiced and the Future!',
-    'This photo brings back so many great memories.'
+    'https://s3.amazonaws.com/spicedling/61-s_gfV94j4xMBF58jI0vunCuaFkl55.jpg',
+    'The Beatles',
+    'Sgt. Peppers Lonely Hearts Club Band',
+    'Rolling Stone Magazine never lies.'
 );
 
 INSERT INTO images (url, op, title, description) VALUES (
-    'https://s3.amazonaws.com/spicedling/wg8d94G_HrWdq7bU_2wT6Y6F3zrX-kej.jpg',
-    'discoduck',
-    'Elvis',
-    'We can''t go on together with suspicious minds.'
+    'https://s3.amazonaws.com/spicedling/c3PCD-4h8EomqUemEkW2XiXbYPEOJegf.jpg',
+    'Miles Davis',
+    'Kind Of Blue',
+    'A masterpiece for the ages.'
 );
 
 INSERT INTO images (url, op, title, description) VALUES (
-    'https://s3.amazonaws.com/spicedling/XCv4AwJdm6QuzjenFPKJocpipRNNMwze.jpg',
-    'discoduck',
-    'To be or not to be',
-    'That is the question.'
+    'https://s3.amazonaws.com/spicedling/WuznaJ4UlQ8DVwhoHgvhoW7W4XYi85_v.jpg',
+    'Led Zeppelin',
+    'Led Zeppelin',
+    'Simply Led Zeppelin.'
+);
+
+INSERT INTO images (url, op, title, description) VALUES (
+    'https://s3.amazonaws.com/spicedling/BIQS9cI7P9Z17R2h1lC6WrIGD1A4-gYh.jpg',
+    'Nine Inch Nails',
+    'The Fragile',
+    'Crazy and ambitious Trent!'
+);
+
+INSERT INTO images (url, op, title, description) VALUES (
+    'https://s3.amazonaws.com/spicedling/NY2Wex1fI8d4pz30n1X-mV2QG2T-4yRu.jpg',
+    'Pink Floyd',
+    'The Dark Side of the Moon',
+    'This still hits deep!'
+);
+
+INSERT INTO images (url, op, title, description) VALUES (
+    'https://s3.amazonaws.com/spicedling/OjxXU-EDEdaOH3iNjyG5N2XJXYDzViHh.jpg',
+    'The Mars Volta',
+    'Frances the Mute',
+    'Wanna lose track of time and space for 77 minutes?'
 );
 
 CREATE TABLE comments(
@@ -41,24 +62,24 @@ CREATE TABLE comments(
 
 INSERT INTO comments (poster, comment, image_id) VALUES (
     'discoduck',
-    'This was a lot of fun!',
+    'Too mainstream, Revolver is far superior!',
     1
 );
 
 INSERT INTO comments (poster, comment, image_id) VALUES (
     'funkychicken',
-    'I prefer Jimi Hendrix',
+    'I always listen to this in the kitchen',
     2
 );
 
 INSERT INTO comments (poster, comment, image_id) VALUES (
     'funkychicken',
-    'I just ordered 🍕',
+    'This always gets me dazed and confused, if you know what I mean 🍀💨',
     3
 );
 
 INSERT INTO comments (poster, comment, image_id) VALUES (
     'discoduck',
-    'I prefer muffins over 🍕',
+    'Zappa would have Led Zep for breakfast!',
     3
 );

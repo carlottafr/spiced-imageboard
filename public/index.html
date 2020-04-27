@@ -1,20 +1,19 @@
 <!doctype html>
 <html>
 <head>
-    <title>Carlotta's Image Board</title>
+    <title>Album Image Board</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Carlotta's Image Board</h1>
+    <h1>Life-Changing Albums</h1>
     <!-- container for vue instance will have access to vue code -->
-    <h2>Latest Images</h2>
     <div id="main">
         <form>
-            <input v-model='title' type="text" name="title" placeholder="Title">
+            <input v-model='title' type="text" name="title" placeholder="Album Title">
+            <input v-model='op' type="text" name="op" placeholder="Artist">
             <input v-model='description' type="text" name="description" placeholder="Description">
-            <input v-model='op' type="text" name="op" placeholder="Username">
-            <!-- <label for="file">Choose a file</label> -->
-            <input @change='handleChange' type="file" name="file" id="file" accept="image/*">
+            <input @change='handleChange' type="file" name="file" id="file" class="inputfile" accept="image/*">
+            <label for="file" id="inputlabel">Choose</label>
             <button @click='handleClick'>Submit</button>
         </form>
         <!-- 'post-title' can be anything, but has to be 'kebap-base', not camelCase -->
@@ -31,21 +30,21 @@
                 v-for="image in images"
                 v-if="images.length">
                 <img :src="image.url" />
-                <label for=img>{{ image.title }}</label>
+                <br />
+                <label for=img>"{{ image.title }}" by {{ image.op }}</label>
             </div>
         </div>
-        <!-- <first-component></first-component> -->
+        <button v-if="moreAlbums" id="more" @click="getMore">Load More</button>
     </div>
 
     <!-- We can only return one element from the script tag. -->
+    <!-- This would be the "component"-classed div in this case. -->
     <script type="text/x-template" id="commentModal">
         <div class="component">
             <p id="x" @click="closeModal">X</p>
             <img :src="image.url" />
-            <p>Title: {{image.title}}</p>
-            <p>Description: {{image.description}}</p>
-            <p>OP: {{image.op}}</p>
-            <p>OP Time: {{image.created_at}}</p>
+            <p>"{{ image.title }}" by {{ image.op }} ({{ image.created_at }}):<br />
+                "{{ image.description }}"</p>
             <p>Post your comment here:</p>
             <input v-model="poster" type="text" name="poster" placeholder="Username">
             <input v-model="comment" type="text" name="comment" placeholder="Comment">
@@ -53,9 +52,8 @@
             <p class="comments"
                 v-for="comment in comments"
                 v-if="comments.length">
-                Poster: {{comment.poster}}<br />
-                Comment: {{comment.comment}}<br />
-                Poster Time: {{comment.created_at}}
+                {{comment.poster}} commented (on {{ comment.created_at }}):<br />
+                "{{comment.comment}}"
             </p>
         </div>
     </script>
