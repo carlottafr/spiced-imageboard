@@ -24,7 +24,6 @@
         },
         watch: {
             id: function () {
-                // console.log("id changed as noticed the watcher.");
                 this.showModal();
             },
         },
@@ -129,10 +128,6 @@
                 this.file = e.target.files[0];
             },
             getMore: function () {
-                console.log(
-                    "This is the last image ID: ",
-                    this.images[this.images.length - 1].id
-                );
                 var lastId = { id: this.images[this.images.length - 1].id };
                 var self = this;
                 axios

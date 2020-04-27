@@ -6,6 +6,16 @@ body {
     font-size: 12px;
 }
 
+h1 {
+    color: white;
+    text-shadow: 2px 4px 10px black;
+    line-height: 0.7em;
+    font-size: 80px;
+    font-weight: bolder;
+    font-family: monospace;
+    font-variant: small-caps;
+}
+
 a,
 .container label {
     text-decoration: none;
@@ -47,23 +57,47 @@ img {
     overflow: hidden;
 }
 
+input[type="text"] {
+    border: 1px solid #383e42;
+    border-radius: 0.3em;
+}
+
+footer {
+    font-size: 16px;
+    color: #383e42;
+}
+
+.component,
+#inputlabel {
+    background: #383e42;
+}
+
 .component {
-    background: hotpink;
     /* stretch it over the screen: */
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
 }
 
 .container {
+    background-image: url("./bg.jpg");
+    background-size: contain;
+    background-repeat: repeat;
     margin: 20px;
     display: grid;
     grid-template-columns: repeat(3, 320px);
     justify-content: center;
     align-items: center;
-    background: #383e42;
+    border-radius: 0.3em;
 }
 
 .image {
@@ -98,10 +132,6 @@ img {
     z-index: -1;
 }
 
-#inputlabel {
-    background: #383e42;
-}
-
 #x {
     cursor: pointer;
     position: absolute;
@@ -111,7 +141,11 @@ img {
 
 @media screen and (max-device-width: 480px) and (orientation: portrait) {
     body {
-        font-size: 32px;
+        font-size: 40px;
+    }
+
+    h1 {
+        font-size: 150px;
     }
 
     form {
@@ -120,27 +154,51 @@ img {
         justify-content: unset;
     }
 
-    form input[type="text"] {
+    form label {
+        font-size: 50px;
+    }
+
+    input[type="text"] {
         margin-bottom: 40px;
         text-align: center;
-    }
-
-    input,
-    button,
-    #inputlabel {
-        font-size: 40px;
+        font-size: 64px;
+        font-weight: lighter;
     }
 
     button,
     #inputlabel {
-        width: 30%;
+        font-size: 64px;
+    }
+
+    button,
+    #inputlabel {
+        width: 50%;
         margin: 0 auto;
         padding: 20px;
     }
 
+    img,
+    .component img {
+        min-width: 780px;
+        max-width: 780px;
+        min-height: 750px;
+        max-height: 750px;
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    img {
+        margin-top: 5px;
+    }
+
+    p {
+        margin-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
     .container {
         margin-left: 20px;
-        background: white;
         display: grid;
         grid-template-columns: 1fr;
         justify-content: center;
@@ -149,31 +207,28 @@ img {
 
     .image {
         border: 1px solid gray;
-        min-width: 930px;
-        max-width: 930px;
-        min-height: 940px;
-        max-height: 940px;
-        padding-top: 10px;
-        margin-bottom: 20px;
-    }
-
-    img,
-    .component img {
-        margin-top: 5px;
-        min-width: 900px;
-        max-width: 900px;
+        min-width: 840px;
+        max-width: 840px;
         min-height: 880px;
         max-height: 880px;
-        object-fit: cover;
-        overflow: hidden;
+        padding-top: 20px;
+        margin-top: 40px;
+        margin-left: 60px;
+        margin-right: 60px;
+        margin-bottom: 40px;
     }
 
-    label {
-        margin-top: 5px;
+    .component img {
+        margin-top: 80px;
     }
 
     #inputlabel {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    #more {
+        margin-top: 40px;
+        margin-bottom: 40px;
     }
 }

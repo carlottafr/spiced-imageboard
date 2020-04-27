@@ -5,13 +5,16 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Life-Changing Albums</h1>
+    <h1>Make Albums Great Again</h1>
     <!-- container for vue instance will have access to vue code -->
     <div id="main">
         <form>
-            <input v-model='title' type="text" name="title" placeholder="Album Title">
-            <input v-model='op' type="text" name="op" placeholder="Artist">
-            <input v-model='description' type="text" name="description" placeholder="Description">
+            <label for="title">Album Title</label>
+            <input v-model='title' type="text" name="title" autocomplete="off">
+            <label for="op">Artist</label>
+            <input v-model='op' type="text" name="op" autocomplete="off">
+            <label for="description">Description</label>
+            <input v-model='description' type="text" name="description" autocomplete="off">
             <input @change='handleChange' type="file" name="file" id="file" class="inputfile" accept="image/*">
             <label for="file" id="inputlabel">Choose</label>
             <button @click='handleClick'>Submit</button>
@@ -31,11 +34,11 @@
                 <a :href="'#' + image.id">
                 <img :src="image.url" />
                 <br />
-                <label for=img>"{{ image.title }}" by {{ image.op }}</label>
+                <p>"{{ image.title }}" by {{ image.op }}</p>
                 </a>
             </div>
+            <button v-if="moreAlbums" id="more" @click="getMore">Load More</button>
         </div>
-        <button v-if="moreAlbums" id="more" @click="getMore">Load More</button>
     </div>
 
     <!-- We can only return one element from the script tag. -->
@@ -44,11 +47,14 @@
         <div class="component">
             <p id="x" @click="closeModal">X</p>
             <img :src="image.url" />
-            <p>"{{ image.title }}" by {{ image.op }} ({{ image.created_at }}):<br />
+            <p>"{{ image.title }}" by {{ image.op }}:<br />
                 "{{ image.description }}"</p>
+            <p style="font-size: 32px;">(posted on {{ image.created_at }})</p>
             <p>Post your comment here:</p>
-            <input v-model="poster" type="text" name="poster" placeholder="Username">
-            <input v-model="comment" type="text" name="comment" placeholder="Comment">
+            <label for="poster">Username</label>
+            <input v-model="poster" type="text" name="poster" autocomplete="off">
+            <label for="comment">Comment</label>
+            <input v-model="comment" type="text" name="comment" autocomplete="off">
             <button @click="postComment">Submit</button>
             <p class="comments"
                 v-for="comment in comments"
@@ -58,7 +64,7 @@
             </p>
         </div>
     </script>
-
+    <footer>Carlotta &copy; Spiced Academy 2020</footer>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <!-- script.js needs to be linked after vue and axios have been loaded -->
