@@ -46,12 +46,18 @@
     <script type="text/x-template" id="commentModal">
         <div class="component">
             <p id="x" @click="closeModal">X</p>
+            <!-- Previous and next buttons -->
+            <div class="arrow">
+                <p v-if="image.next_id" style="float: left;"><a :href="'#' + image.next_id">< Previous</a></p>
+                <p v-if="image.prev_id" style="float: right;"><a :href="'#' + image.prev_id">Next ></a></p>
+            </div>
+            <!-- Image -->
             <img :src="image.url" />
-            <p v-if="image.next_id" id="next"><a :href="'#' + image.next_id"><</a></p> 
-            <p v-if="image.prev_id" id="prev"><a :href="'#' + image.prev_id">></a></p>
-            <p>"{{ image.title }}" by {{ image.op }}:<br />
+            <!-- Title, artist and description -->
+            <p id="title">"{{ image.title }}" by {{ image.op }}:<br />
                 "{{ image.description }}"</p>
-            <p style="font-size: 32px;">(posted on {{ image.created_at }})</p>
+            <!-- Post date / time -->
+            <p id="time">(posted on {{ image.created_at }})</p>
             <p>Post your comment here:</p>
             <label for="poster">Username</label>
             <input v-model="poster" type="text" name="poster" autocomplete="off">

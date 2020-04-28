@@ -126,6 +126,10 @@ app.post("/image-post", (req, res) => {
                 // so that the next arrow is hidden
                 result.rows[0].prev_id = null;
             }
+            console.log(
+                "This is the result after showTime and offset: ",
+                result.rows[0]
+            );
             finalJson.push(result.rows[0]);
         })
         .then(() => {
