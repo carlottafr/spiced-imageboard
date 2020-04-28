@@ -37,8 +37,7 @@ exports.upload = (req, res, next) => {
 
     promise
         .then(() => {
-            // it worked!!!
-            // console.log("AWS putObject successful.");
+            // it worked
             next();
             fs.unlink(path, () => {});
             // ^ deletes the /uploads images

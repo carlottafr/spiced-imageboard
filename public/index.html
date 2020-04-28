@@ -47,6 +47,8 @@
         <div class="component">
             <p id="x" @click="closeModal">X</p>
             <img :src="image.url" />
+            <p v-if="image.next_id" id="next"><a :href="'#' + image.next_id"><</a></p> 
+            <p v-if="image.prev_id" id="prev"><a :href="'#' + image.prev_id">></a></p>
             <p>"{{ image.title }}" by {{ image.op }}:<br />
                 "{{ image.description }}"</p>
             <p style="font-size: 32px;">(posted on {{ image.created_at }})</p>

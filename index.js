@@ -49,6 +49,7 @@ const showTime = (posttime) => {
         second: "numeric",
         hour12: false,
         // the following makes no sense, but it is what it is
+        // took quite some rounds of testing
         timeZone: "Etc/GMT-2",
     }).format(posttime));
 };
@@ -82,8 +83,6 @@ app.post("/get-more", (req, res) => {
 // POST /upload
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    // console.log("File: ", req.file);
-    // console.log("Input: ", req.body);
     let awsUrl = config.s3Url;
     awsUrl += req.file.filename;
     req.body.url = awsUrl;
@@ -110,10 +109,23 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 
 app.post("/image-post", (req, res) => {
     let finalJson = [];
+    const offset = (id) => {
+        if (id > 1) {
+            return id - 2;
+        } else {
+            return null;
+        }
+    };
+    console.log("Req.body: ", req.body.id);
     return db
-        .getImage(req.body.id)
+        .getImage(req.body.id, offset(req.body.id))
         .then((result) => {
             result.rows[0].created_at = showTime(result.rows[0].created_at);
+            if (result.rows[0].id === 1 && result.rows[0].prev_id === 1) {
+                // set it to null at the first or rather last picture
+                // so that the next arrow is hidden
+                result.rows[0].prev_id = null;
+            }
             finalJson.push(result.rows[0]);
         })
         .then(() => {

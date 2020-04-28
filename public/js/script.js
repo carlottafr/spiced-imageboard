@@ -16,6 +16,8 @@
                     poster: "",
                     comment: "",
                     postertime: "",
+                    prev_id: "",
+                    next_id: "",
                 },
                 comments: [],
                 poster: "",

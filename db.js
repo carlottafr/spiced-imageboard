@@ -24,8 +24,15 @@ module.exports.insertEntry = (url, op, title, description) => {
     );
 };
 
-module.exports.getImage = (id) => {
-    return db.query(`SELECT * FROM images WHERE id = $1;`, [id]);
+module.exports.getImage = (id, offset) => {
+    return db.query(
+        `SELECT *, (
+        SELECT id FROM images LIMIT 1 OFFSET $1
+    ) AS next_id, (
+        SELECT id FROM images LIMIT 1 OFFSET $2
+    ) AS prev_id FROM images WHERE id = $1;`,
+        [id, offset]
+    );
 };
 
 module.exports.getComments = (id) => {
