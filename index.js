@@ -157,6 +157,6 @@ app.post("/post-comment", (req, res) => {
         });
 });
 
-app.listen(8080, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log("Image Board server is at your service!");
 });
