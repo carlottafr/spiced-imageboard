@@ -116,7 +116,6 @@ app.post("/image-post", (req, res) => {
             return null;
         }
     };
-    console.log("Req.body: ", req.body.id);
     return db
         .getImage(req.body.id, offset(req.body.id))
         .then((result) => {
@@ -126,10 +125,6 @@ app.post("/image-post", (req, res) => {
                 // so that the next arrow is hidden
                 result.rows[0].prev_id = null;
             }
-            console.log(
-                "This is the result after showTime and offset: ",
-                result.rows[0]
-            );
             finalJson.push(result.rows[0]);
         })
         .then(() => {
