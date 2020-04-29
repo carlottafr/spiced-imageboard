@@ -353,7 +353,7 @@ button,
         right: 10px;
     }
 }
-@media screen and (min-device-width: 1280px) and (max-device-width: 1440px) {
+@media screen and (min-device-width: 1280px) and (max-device-width: 16000px) {
     h1 {
         font-size: 80px;
     }
