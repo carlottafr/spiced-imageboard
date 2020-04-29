@@ -50,7 +50,7 @@ const showTime = (posttime) => {
         hour12: false,
         // the following makes no sense, but it is what it is
         // took quite some rounds of testing
-        timeZone: "Etc/GMT-2",
+        timeZone: "Etc/GMT",
     }).format(posttime));
 };
 

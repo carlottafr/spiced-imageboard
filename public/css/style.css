@@ -15,11 +15,6 @@ h1 {
     color: #69f0ae;
 }
 
-/* form {
-    text-align: left;
-    margin-bottom: 20px;
-} */
-
 form label,
 label {
     padding: 15px;
@@ -143,8 +138,17 @@ button,
     bottom: 0;
     right: 0;
     color: white;
-    -webkit-animation: appear 1s;
-    animation: appear 1s;
+    -webkit-animation: popup 1s;
+    animation: popup 1s;
+}
+
+@keyframes popup {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0%);
+    }
 }
 
 .innercomponent {

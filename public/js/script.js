@@ -37,7 +37,6 @@
                 axios
                     .post("/image-post", { id: this.id })
                     .then(function (response) {
-                        console.log("Response image: ", response.data[0]);
                         self.image = response.data.shift();
                         self.comments = response.data[0];
                     })
