@@ -120,6 +120,9 @@
                             "Response from POST /upload: ",
                             response.data
                         );
+                        self.title = "";
+                        self.description = "";
+                        self.op = "";
                         self.images.unshift(response.data[0]);
                     })
                     .catch(function (err) {
