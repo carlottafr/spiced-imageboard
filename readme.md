@@ -1,4 +1,4 @@
-<h1>Album Cover Image Board</h1>
+<h1><a href="https://albumimg.herokuapp.com/" alt="Album Cover Image Board" title="Album Cover Image Board" target="_blank">Album Cover Image Board</a></h1>
 <a href="http://carlottafrommer.com/files/aib.mp4" target="_blank"><img src="/public/aib.png" width="300" />
 <p>Click the screenshot or here to get a preview of the app!</p></a>
 
